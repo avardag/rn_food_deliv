@@ -1,12 +1,26 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import React from "react";
+import {
+  Provider as PaperProvider,
+  MD3LightTheme as DefaultTheme,
+} from "react-native-paper";
+import { StatusBar as ExpoStatusBar } from "expo-status-bar";
+
+import RestaurantsScreen from "./src/screens/restaurants";
+
+const theme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: "tomato",
+    secondary: "yellow",
+  },
+};
 
 export default function App() {
   return (
-    <View style={{ flex: 1, justifyContent: center, alignItems: center }}>
-      <Text>Initial app code</Text>
-    </View>
+    <PaperProvider theme={theme}>
+      <ExpoStatusBar style="auto" />
+      <RestaurantsScreen />
+    </PaperProvider>
   );
 }
-
-const styles = StyleSheet.create({});
