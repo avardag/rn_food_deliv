@@ -1,28 +1,21 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
-import { Card } from "react-native-paper";
-import styled from "styled-components/native";
-// import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { View } from "react-native";
 
-const RestaurantCard = styled(Card)`
-  background-color: ${({ theme }) => theme.colors.bg.primary};
-`;
-const RestaurantCardCover = styled(Card.Cover)`
-  padding: ${({ theme }) => theme.space[3]};
-  background-color: ${({ theme }) => theme.colors.bg.primary};
-`;
-const RestaurantCardTitle = styled.Text`
-  font-family: ${({ theme }) => theme.fonts.heading};
-  font-size: ${({ theme }) => theme.fontSizes.body};
-  color: ${({ theme }) => theme.colors.ui.primary};
-`;
-const RestaurantAddress = styled.Text`
-  font-family: ${({ theme }) => theme.fonts.body};
-  font-size: ${({ theme }) => theme.fontSizes.caption};
-`;
-const InfoWrapper = styled.View`
-  padding: ${({ theme }) => theme.space[3]};
-`;
+import { SvgXml } from "react-native-svg";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import star from "../../../assets/star";
+import openSvg from "../../../assets/openSvg";
+import { Spacer } from "../../components/spacer";
+import StyledText from "../../components/spacer/typography";
+import {
+  RestaurantCard,
+  RestaurantCardCover,
+  RestaurantAddress,
+  InfoWrapper,
+  RatingStars,
+  MiddleSection,
+  SectionEnd,
+} from "./RestaurantInfoCard.styles";
 
 export default function RestaurantInfoCard({ restaurant = {} }) {
   const {
@@ -32,18 +25,38 @@ export default function RestaurantInfoCard({ restaurant = {} }) {
     address = "1426 Lenina str",
     isOpenNow = true,
     rating = 4,
-    isClosedTemporarily = false,
+    isClosedTemporarily = true,
   } = restaurant;
+
+  const ratingArr = Array.from(new Array(Math.floor(rating)));
   return (
     <View>
       <RestaurantCard mode="elevated" elevation={5}>
         <RestaurantCardCover source={{ uri: photos[0] }} />
         <InfoWrapper>
-          <RestaurantCardTitle>{name}</RestaurantCardTitle>
+          <StyledText variant="label">{name}</StyledText>
+          <MiddleSection>
+            <RatingStars>
+              {ratingArr.map((item, idx) => (
+                <SvgXml xml={star} width={20} height={20} key={idx} />
+              ))}
+            </RatingStars>
+            <SectionEnd>
+              {isClosedTemporarily && (
+                <StyledText variant="error">Closed Temporarily</StyledText>
+              )}
+              <Spacer position="left" size="large">
+                {isOpenNow && <SvgXml xml={openSvg} width={30} height={30} />}
+              </Spacer>
+              <Spacer position="left" size="large">
+                <MaterialCommunityIcons name={icon} size={24} color="black" />
+              </Spacer>
+            </SectionEnd>
+          </MiddleSection>
+
           <RestaurantAddress>{address}</RestaurantAddress>
         </InfoWrapper>
       </RestaurantCard>
-      {/* <MaterialCommunityIcons name="silverware-fork-knife" size={24} color="black" /> */}
     </View>
   );
 }
