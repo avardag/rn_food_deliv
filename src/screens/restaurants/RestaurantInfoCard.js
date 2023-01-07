@@ -1,6 +1,5 @@
 import React from "react";
 import { View } from "react-native";
-
 import { SvgXml } from "react-native-svg";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import star from "../../../assets/star";
