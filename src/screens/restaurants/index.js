@@ -4,12 +4,8 @@ import { StatusBar, Platform, SafeAreaView, FlatList } from "react-native";
 import styled from "styled-components/native";
 import RestaurantInfoCard from "./RestaurantInfoCard";
 import { Spacer } from "../../components/spacer";
+import { SafeAreaContainer } from "../../components/utility/safeAreaContainer";
 
-//TODO: check the bellow StatusBar.currentHeight on IOS
-const Container = styled.SafeAreaView`
-  flex: 1;
-  margin-top: ${Platform.OS === "android" ? StatusBar.currentHeight : 0}px;
-`;
 const SearchView = styled.View`
   padding: ${({ theme }) => theme.space[3]};
 `;
@@ -37,7 +33,7 @@ export default function RestaurantsScreen() {
     </Spacer>
   );
   return (
-    <Container>
+    <SafeAreaContainer>
       <SearchView>
         <Searchbar
           placeholder="Search"
@@ -51,6 +47,6 @@ export default function RestaurantsScreen() {
         keyExtractor={(item) => item.name}
         // contentContainerStyle={{ padding: 16 }}
       />
-    </Container>
+    </SafeAreaContainer>
   );
 }

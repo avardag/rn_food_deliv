@@ -1,4 +1,7 @@
 import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Ionicons } from "@expo/vector-icons";
 import {
   Provider as PaperProvider,
   MD3LightTheme as DefaultTheme,
@@ -13,6 +16,24 @@ import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";
 import { theme } from "./src/theme";
 
 import RestaurantsScreen from "./src/screens/restaurants";
+import MapScreen from "./src/screens/map";
+import SettingsScreen from "./src/screens/settings";
+
+const Tab = createBottomTabNavigator();
+
+//{route.name: ionicons}
+const TAB_ICON = {
+  Restaurants: "restaurant",
+  Map: "map",
+  Settings: "settings",
+};
+
+const renderTabIcon =
+  (route) =>
+  ({ color, size }) => {
+    // You can return any component that you like here!
+    return <Ionicons name={TAB_ICON[route.name]} size={size} color={color} />;
+  };
 
 export default function App() {
   let [oswaldLoaded] = useOswald({
@@ -22,11 +43,25 @@ export default function App() {
     Lato_400Regular,
   });
   if (!oswaldLoaded || !latoLoaded) return null;
+
   return (
     <ThemeProvider theme={theme}>
       <PaperProvider>
         <ExpoStatusBar style="auto" />
-        <RestaurantsScreen />
+        <NavigationContainer>
+          <Tab.Navigator
+            screenOptions={({ route }) => ({
+              headerShown: false,
+              tabBarIcon: renderTabIcon(route),
+              tabBarActiveTintColor: "tomato",
+              tabBarInactiveTintColor: "gray",
+            })}
+          >
+            <Tab.Screen name="Restaurants" component={RestaurantsScreen} />
+            <Tab.Screen name="Map" component={MapScreen} />
+            <Tab.Screen name="Settings" component={SettingsScreen} />
+          </Tab.Navigator>
+        </NavigationContainer>
       </PaperProvider>
     </ThemeProvider>
   );
