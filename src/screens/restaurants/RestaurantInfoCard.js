@@ -1,7 +1,6 @@
 import React from "react";
 import { View } from "react-native";
 import { SvgXml } from "react-native-svg";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 import star from "../../../assets/star";
 import openSvg from "../../../assets/openSvg";
 import { Spacer } from "../../components/spacer";
@@ -14,6 +13,7 @@ import {
   RatingStars,
   MiddleSection,
   SectionEnd,
+  IconImage,
 } from "./RestaurantInfoCard.styles";
 
 export default function RestaurantInfoCard({ restaurant = {} }) {
@@ -48,7 +48,7 @@ export default function RestaurantInfoCard({ restaurant = {} }) {
                 {isOpenNow && <SvgXml xml={openSvg} width={30} height={30} />}
               </Spacer>
               <Spacer position="left" size="large">
-                <MaterialCommunityIcons name={icon} size={24} color="black" />
+                <IconImage source={{ uri: icon }} />
               </Spacer>
             </SectionEnd>
           </MiddleSection>
@@ -59,3 +59,23 @@ export default function RestaurantInfoCard({ restaurant = {} }) {
     </View>
   );
 }
+
+// const rest = {
+//   businessStatus: "OPERATIONAL",
+//   geometry: { location: [Object], viewport: [Object] },
+//   icon: "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png",
+//   isClosedTemporarily: false,
+//   isOpenNow: true,
+//   name: "Patxi's Pizza",
+//   openingHours: { openNow: true },
+//   photos: [[Object]],
+//   placeId: "some place id 60",
+//   plusCode: { compoundCode: "", globalCode: "" },
+//   priceLevel: 2,
+//   rating: 4.2,
+//   reference: "",
+//   scope: "",
+//   types: ["restaurant", "food", "point_of_interest", "establishment"],
+//   userRatingsTotal: 861,
+//   vicinity: "511 Hayes Street, San Francisco",
+// };

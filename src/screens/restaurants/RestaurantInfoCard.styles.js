@@ -21,6 +21,10 @@ export const RatingStars = styled.View`
   padding-top: ${({ theme }) => theme.space[3]};
   padding-bottom: ${({ theme }) => theme.space[3]};
 `;
+export const IconImage = styled.Image`
+  width: 30px;
+  height: 30px;
+`;
 export const MiddleSection = styled.View`
   flex-direction: row;
   justify-content: space-between;

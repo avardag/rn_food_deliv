@@ -18,6 +18,7 @@ import { theme } from "./src/theme";
 import RestaurantsScreen from "./src/screens/restaurants";
 import MapScreen from "./src/screens/map";
 import SettingsScreen from "./src/screens/settings";
+import { RestaurantContextProvider } from "./src/context/restaurants/RestaurantsContext";
 
 const Tab = createBottomTabNavigator();
 
@@ -48,20 +49,22 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <PaperProvider>
         <ExpoStatusBar style="auto" />
-        <NavigationContainer>
-          <Tab.Navigator
-            screenOptions={({ route }) => ({
-              headerShown: false,
-              tabBarIcon: renderTabIcon(route),
-              tabBarActiveTintColor: "tomato",
-              tabBarInactiveTintColor: "gray",
-            })}
-          >
-            <Tab.Screen name="Restaurants" component={RestaurantsScreen} />
-            <Tab.Screen name="Map" component={MapScreen} />
-            <Tab.Screen name="Settings" component={SettingsScreen} />
-          </Tab.Navigator>
-        </NavigationContainer>
+        <RestaurantContextProvider>
+          <NavigationContainer>
+            <Tab.Navigator
+              screenOptions={({ route }) => ({
+                headerShown: false,
+                tabBarIcon: renderTabIcon(route),
+                tabBarActiveTintColor: "tomato",
+                tabBarInactiveTintColor: "gray",
+              })}
+            >
+              <Tab.Screen name="Restaurants" component={RestaurantsScreen} />
+              <Tab.Screen name="Map" component={MapScreen} />
+              <Tab.Screen name="Settings" component={SettingsScreen} />
+            </Tab.Navigator>
+          </NavigationContainer>
+        </RestaurantContextProvider>
       </PaperProvider>
     </ThemeProvider>
   );
