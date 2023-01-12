@@ -34,5 +34,5 @@ export function locationTransform(locationResult) {
   const { geometry = {} } = formattedResponse.results[0];
   const { lat, lng } = geometry.location;
 
-  return { lng, lat };
+  return { lng, lat, viewport: geometry.viewport };
 }

@@ -4,7 +4,7 @@ import { SvgXml } from "react-native-svg";
 import star from "../../../assets/star";
 import openSvg from "../../../assets/openSvg";
 import { Spacer } from "../../components/spacer";
-import StyledText from "../../components/spacer/typography";
+import StyledText from "../../components/typography";
 import {
   RestaurantCard,
   RestaurantCardCover,

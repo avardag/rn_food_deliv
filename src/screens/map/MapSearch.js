@@ -5,9 +5,12 @@ import { LocationContext } from "../../context/location/locationContext";
 
 const SearchView = styled.View`
   padding: ${({ theme }) => theme.space[3]};
+  position: absolute;
+  z-index: 100;
+  width: 100%;
 `;
 
-export default function Search() {
+export default function MapSearch() {
   const { searchKeyword, search } = useContext(LocationContext);
 
   const [searchQuery, setSearchQuery] = useState(searchKeyword);
@@ -21,6 +24,7 @@ export default function Search() {
     <SearchView>
       <Searchbar
         placeholder="Search for a city"
+        icon="map"
         onChangeText={onChangeSearch}
         value={searchQuery}
         onSubmitEditing={() => search(searchQuery)}
