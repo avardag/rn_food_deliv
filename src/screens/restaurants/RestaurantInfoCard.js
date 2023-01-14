@@ -15,6 +15,7 @@ import {
   SectionEnd,
   IconImage,
 } from "./RestaurantInfoCard.styles";
+import FavoutriteBtn from "../../components/favouriteBtn";
 
 export default function RestaurantInfoCard({ restaurant = {} }) {
   const {
@@ -31,6 +32,7 @@ export default function RestaurantInfoCard({ restaurant = {} }) {
   return (
     <View>
       <RestaurantCard mode="elevated" elevation={5}>
+        <FavoutriteBtn restaurant={restaurant} />
         <RestaurantCardCover source={{ uri: photos[0] }} />
         <InfoWrapper>
           <StyledText variant="label">{name}</StyledText>
