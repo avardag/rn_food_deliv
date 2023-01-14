@@ -1,4 +1,3 @@
-import { View, Text, TouchableOpacity } from "react-native";
 import React, { useContext } from "react";
 import styled from "styled-components";
 import { AntDesign } from "@expo/vector-icons";

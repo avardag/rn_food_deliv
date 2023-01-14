@@ -2,7 +2,6 @@ import React from "react";
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import RestaurantsScreen from "../screens/restaurants";
-import { Text } from "react-native";
 import RestaurantDetail from "../screens/restaurants/screens/restaurantDetail";
 
 const RestaurantsStack = createNativeStackNavigator();
