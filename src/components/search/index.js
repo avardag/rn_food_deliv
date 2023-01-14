@@ -7,7 +7,7 @@ const SearchView = styled.View`
   padding: ${({ theme }) => theme.space[3]};
 `;
 
-export default function Search() {
+export default function Search({ isFavToggled, onFavToggle }) {
   const { searchKeyword, search } = useContext(LocationContext);
 
   const [searchQuery, setSearchQuery] = useState(searchKeyword);
@@ -21,6 +21,8 @@ export default function Search() {
     <SearchView>
       <Searchbar
         placeholder="Search for a city"
+        icon={isFavToggled ? "heart" : "heart-outline"}
+        onIconPress={onFavToggle}
         onChangeText={onChangeSearch}
         value={searchQuery}
         onSubmitEditing={() => search(searchQuery)}
