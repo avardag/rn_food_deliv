@@ -2,10 +2,12 @@ import React from "react";
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
-import RestaurantsScreen from "../screens/restaurants";
 import MapScreen from "../screens/map";
 import SettingsScreen from "../screens/settings";
 import RestaurantsNavigator from "./RestaurantsNavigator";
+import { FavouritesContextProvider } from "../context/favourites/favouritesContext";
+import { LocationContextProvider } from "../context/location/locationContext";
+import { RestaurantContextProvider } from "../context/restaurants/RestaurantsContext";
 const Tab = createBottomTabNavigator();
 
 //{route.name: ionicons}
@@ -24,17 +26,23 @@ const renderTabIcon =
 
 export default function TabNavigator() {
   return (
-    <Tab.Navigator
-      screenOptions={({ route }) => ({
-        headerShown: false,
-        tabBarIcon: renderTabIcon(route),
-        tabBarActiveTintColor: "tomato",
-        tabBarInactiveTintColor: "gray",
-      })}
-    >
-      <Tab.Screen name="Restaurants" component={RestaurantsNavigator} />
-      <Tab.Screen name="Map" component={MapScreen} />
-      <Tab.Screen name="Settings" component={SettingsScreen} />
-    </Tab.Navigator>
+    <FavouritesContextProvider>
+      <LocationContextProvider>
+        <RestaurantContextProvider>
+          <Tab.Navigator
+            screenOptions={({ route }) => ({
+              headerShown: false,
+              tabBarIcon: renderTabIcon(route),
+              tabBarActiveTintColor: "tomato",
+              tabBarInactiveTintColor: "gray",
+            })}
+          >
+            <Tab.Screen name="Restaurants" component={RestaurantsNavigator} />
+            <Tab.Screen name="Map" component={MapScreen} />
+            <Tab.Screen name="Settings" component={SettingsScreen} />
+          </Tab.Navigator>
+        </RestaurantContextProvider>
+      </LocationContextProvider>
+    </FavouritesContextProvider>
   );
 }
