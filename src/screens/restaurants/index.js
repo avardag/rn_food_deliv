@@ -9,6 +9,7 @@ import Search from "../../components/search";
 import FavouritesBar from "../../components/favouritesBar";
 import { FavouritesContext } from "../../context/favourites/favouritesContext";
 import { RestaurantFlatList } from "./RestaurantsStyles";
+import { FadeInView } from "../../components/animation/fadeAnimation";
 
 export default function RestaurantsScreen({ navigation }) {
   const { restaurants, isLoading } = useContext(RestaurantContext);
@@ -22,7 +23,9 @@ export default function RestaurantsScreen({ navigation }) {
           navigation.navigate("RestaurantDetail", { restaurant: item })
         }
       >
-        <RestaurantInfoCard restaurant={item} />
+        <FadeInView>
+          <RestaurantInfoCard restaurant={item} />
+        </FadeInView>
       </TouchableOpacity>
     </Spacer>
   );
